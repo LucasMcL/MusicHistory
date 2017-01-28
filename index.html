@@ -8,20 +8,26 @@
 </head>
 <body ng-app="MusicHistory">
 
-<nav>
-  <div class="nav-wrapper">
-    <a href="#song-list" class="brand-logo">Music History</a>
-    <ul class="right">
-      <li><a href="#/song-list">My Songs</a></li>
-      <li><a href="#/add-song">Add Song</a></li>
-    </ul>
-  </div>
-</nav>
+<!-- Nav bar within app but not in ng-view -->
+<!-- Hidden when on login page -->
+<div ng-controller="NavbarCtrl">
+  <nav ng-if="notOnLoginPage()">
+    <div class="nav-wrapper">
+      <a href="#/song-list" class="brand-logo">Music History</a>
+      <ul class="right">
+        <li><a href="#/song-list">My Songs</a></li>
+        <li><a href="#/add-song">Add Song</a></li>
+        <li><a href="#/">Log Out</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
 
 <div ng-view>
 
 </div>
 
+<script src="/lib/firebase/firebase.js"></script> <!-- firebase -->
 <script src="/lib/jquery/dist/jquery.min.js"></script> <!-- jQuery -->
 <script src="/lib/materialize/dist/js/materialize.min.js"></script> <!-- materialize -->
 <script src="/lib/angular/angular.min.js"></script> <!-- angular -->
