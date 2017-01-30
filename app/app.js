@@ -1,5 +1,5 @@
-angular.module('MusicHistory', ['ngRoute'])
-	.config(($routeProvider, $locationProvider) => {
+app = angular.module('MusicHistory', ['ngRoute'])
+app.config(($routeProvider, $locationProvider) => {
 		console.log('config executing')
 		$locationProvider.hashPrefix('')
 
@@ -69,14 +69,6 @@ angular.module('MusicHistory', ['ngRoute'])
 	})
 	.controller('AddSongCtrl', function() {
 		console.log('AddSongCtrl instantiated')
-	})
-	.controller('NavbarCtrl', function($scope, $location) {
-		console.log('NavbarCtrl instantiated')
-
-		$scope.notOnLoginOrRegister = function() {
-			// Returns true if the user is not on the login or register page
-			return ($location.path() !== '/login' && $location.path() !== '/register')
-		}
 	})
 	.factory('AuthFactory', function($q) {
 		return {
