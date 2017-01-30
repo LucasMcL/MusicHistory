@@ -1,1 +1,37 @@
-<h2>Song List</h2>
+<!-- - - - - - - - - - - - - - -
+ - - Main View (List of Songs)
+ - - - - - - - - - - - - - -  -->
+
+<!-- Add music is a modal included in this view -->
+
+<div class="container">
+	<h2>Song List</h2>
+	<ul>
+		<li ng-repeat="(song_id, song) in songs">{{song.title}}</li>
+	</ul>
+	<button data-target="add-song-modal" class="right btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></button>
+</div>
+
+<!-- Modal Structure -->
+<div id="add-song-modal" class="modal">
+  <div class="modal-content">
+    <h4>Add song</h4>
+		<form class="row">
+			<div class="input-field col s12">
+				<input type="text" name="song-title" id="song-title" ng-model="new-song-title">
+				<label for="song-title">Song Title</label>
+			</div>
+			<div class="input-field col s12 m6">
+				<input type="password" name="password" id="password" class="validate" ng-model="user_password">
+				<label for="password">Password</label>
+			</div>
+			<div class="form-buttons col s12">
+				<button type="submit" class="btn waves">Log in</button>
+				<a href="#/register" class="right">Need an account?</a>
+			</div>
+		</form>
+  </div>
+  <div class="modal-footer">
+    <a class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>

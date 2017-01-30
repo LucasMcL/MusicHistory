@@ -19,9 +19,12 @@ app.config(($routeProvider, $locationProvider) => {
 				resolve: {
 					// Listens for firebase auth state change
 					// When it changes and a user is logged in it loads the controller
-					// When it changes and a user is not loggied in, it redirects
+					// When it changes and a user is not logged in, it redirects
 					user: (AuthFactory, $location) => {
 						return AuthFactory.getUser().catch(() => $location.path('/login'))
+					},
+					songs: (SongsFactory) => {
+						return SongsFactory.getSongs().catch((error) => {alert(error)})
 					}
 				}
 			})
@@ -37,10 +40,14 @@ app.config(($routeProvider, $locationProvider) => {
 				controller: 'SongDetailsCtrl',
 				templateUrl: '/app/song-details/song-details.html'
 			})
-			.when('/add-song', {
-				controller: 'AddSongCtrl',
-				templateUrl: '/app/add-song/add-song.html'
-			})
+	})
+	.controller('SongListCtrl', function(user, songs, $scope) {
+		console.log('SongListCtrl instantiated')
+		$scope.songs = songs
+
+	  $(document).ready(function(){
+	    $('.modal').modal();
+	  });
 	})
 	.controller('LoginCtrl', function($scope, $window, $location) {
 		console.log('LoginCtrl instantiated')
@@ -60,9 +67,6 @@ app.config(($routeProvider, $locationProvider) => {
 	})
 	.controller('RegisterCtrl', function() {
 		console.log('RegisterCtrl instantiated')
-	})
-	.controller('SongListCtrl', function() {
-		console.log('SongListCtrl instantiated')
 	})
 	.controller('SongDetailsCtrl', function() {
 		console.log('SongDetailsCtrl instantiated')
@@ -88,6 +92,16 @@ app.config(($routeProvider, $locationProvider) => {
 			} // end getUser function
 		} // end return obj
 	}) // end AuthFactory
+	.factory('SongsFactory', function($http) {
+		return {
+			// Fetches songs.  Ng Route attempts to resolve before instantiating controller
+			getSongs: () => {
+				return $http
+					.get('https://music-history-93ce3.firebaseio.com/songs/.json')
+					.then((response) => {return response.data})
+			}
+		}
+	})
 
 
 
