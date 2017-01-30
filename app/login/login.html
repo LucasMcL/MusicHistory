@@ -1,1 +1,20 @@
-<h2>Login</h2>
+<div class="container">
+<h2 class="center-align">Log in</h2>
+	<div class="row">
+		<form class="col s12 m8 offset-m2" ng-submit="onFormSubmit()">
+			<div class="input-field col s12">
+				<input type="email" name="email" id="email" class="validate" ng-model="user_email">
+				<label for="email">Email</label>
+			</div>
+			<div class="input-field col s12">
+				<input type="password" name="password" id="password" class="validate" ng-model="user_password">
+				<label for="password">Password</label>
+			</div>
+			<div class="form-buttons col s12">
+				<button type="submit" class="btn waves">Log in</button>
+				<a href="#/register" class="right">Need an account?</a>
+			</div>
+		</form>
+	</div>
+</div>
+
